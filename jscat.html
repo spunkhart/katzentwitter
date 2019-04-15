@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Katzentwitter</title>
+<link href="https://fonts.googleapis.com/css?family=Alfa+Slab+One|Bangers|Chewy|Comfortaa|Emilys+Candy|Germania+One|Gochi+Hand|Homemade+Apple|Indie+Flower|Life+Savers|Lily+Script+One|Londrina+Solid|Luckiest+Guy|Megrim|Monoton|Mrs+Sheppards|Niconne|Orbitron|Permanent+Marker|Petit+Formal+Script|Righteous|Shadows+Into+Light|Sigmar+One|Special+Elite|Ultra" rel="stylesheet">
+</head>
+<body onload="getCat()">
+    <div style="float:left;">
+        <canvas id = "idCanvas" crossorigin="anonymous" width = "576" height = "577"> </canvas>
+    </div>
+    <div style="float:left;">
+        <div>
+            <select id="schrift">
+                <option value="Permanent Marker">Permanent Marker</option>
+                <option value="Alfa Slab One">Alfa Slab One</option>
+                <option value="Chewy">Chewy</option>
+                <option value="Comfortaa">Comfortaa</option>
+                <option value="Germania One">Germania</option>
+                <option value="Gochi Hand">Gochi Hand</option>
+                <option value="Homemade Apple">Homemade Apple</option>
+                <option value="Lily Script One">Lily Script One</option>
+                <option value="Monoton">Monoton</option>
+                <option value="Orbitron">Orbitron</option>
+                <option value="Petit Formal Script">Petit Formal Script</option>
+                <option value="Righteous">Righteous</option>
+                <option value="Special Elite">Special Elite</option>
+                <option value="Mrs Sheppards">Mrs Sheppards</option>
+                <option value="Indie Flower">Indie Flower</option>
+                <option value="Shadows Into Light">Shadows Into Light</option>
+                <option value="Luckiest Guy">Luckiest Guy</option>
+                <option value="Ultra">Ultra</option>
+                <option value="Bangers">Bangers</option>
+                <option value="Sigmar OneLife Saversz">Sigmar One</option>
+                <option value="Niconne">Niconne</option>
+                <option value="Londrina Solid">Londrina Solid</option>
+                <option value="Emilys Candy">Emilys Candy</option>
+                <option value="Megrim">Megrim</option>
+                <option value="Life Savers">Life Savers</option>
+            </select>
+        </div>
+        <div>
+            <input type="color" id="front1" name="front" value="#4fff00">
+            <input type="color" id="front2" name="front" value="#4fff00">
+            <input type="color" id="front3" name="front" value="#4fff00">
+            <label for="front">front</label>
+        </div>
+        <div>
+            <input type="color" id="back1" name="back" value="#ff00a1">
+            <input type="color" id="back2" name="back" value="#ff00a1">
+            <input type="color" id="back3" name="back" value="#ff00a1">
+            <label for="back">back</label>
+        </div>
+        
+        <div>
+            größe<input type="text" size="3" id="gr" name="gr" value="70"><br>
+            x<input type="text" size="3" id="x" name="x" value="50">
+            y<input type="text" size="3" id="y" name="y" value="100"><br>
+        </div>
+        
+        <textarea name="geiler kommentar" id="textinput" cols="40" rows="5"></textarea>
+        <br>
+        <button class="buttonok" name="apply" onclick="javascript:machet();">ändern</button>
+        <button class="buttonok" name="apply" onclick="javascript:neuesbild();">neues bild</button><br>
+        <button class="buttonok" name="apply" onclick="javascript:to_image();">download</button><br>
+        <image id="theimage" crossorigin="anonymous"></image> 
+    </div>
+    <script>
+    var canvas = document.getElementById('idCanvas');
+    var context = canvas.getContext('2d');
+    var imageObj = new Image();
+        
+    var farbe_front1="";
+    var farbe_front2="";
+    var farbe_front3="";
+        
+    var farbe_back1="";
+    var farbe_back2="";
+    var farbe_back3="";
+        
+    function getCat(){
+        imageObj.src = "https://thiscatdoesnotexist.com";
+        context.drawImage(imageObj, 0, 0, 576, 577);
+    }
+        
+        
+    function to_image(){
+        var canvas = document.getElementById("idCanvas");
+        document.getElementById("theimage").src = canvas.toDataURL();
+        //Canvas2Image.saveAsPNG(canvas);
+    }
+        
+    function random_color(){
+        
+        farbe_front1 = '#'+(Math.random()*0xFFFFFF<<0).toString(16);
+        farbe_front2 = '#'+(Math.random()*0xFFFFFF<<0).toString(16);
+        farbe_front3 = '#'+(Math.random()*0xFFFFFF<<0).toString(16);
+        
+        farbe_back1 = '#'+(Math.random()*0xFFFFFF<<0).toString(16);
+        farbe_back2 = '#'+(Math.random()*0xFFFFFF<<0).toString(16);
+        farbe_back3 = '#'+(Math.random()*0xFFFFFF<<0).toString(16);
+        
+        document.getElementById("front1").value = farbe_front1;
+        document.getElementById("front2").value = farbe_front2;
+        document.getElementById("front3").value = farbe_front3;
+        
+        document.getElementById("back1").value = farbe_back1;
+        document.getElementById("back2").value = farbe_back2;
+        document.getElementById("back3").value = farbe_back3;
+        
+    }
+        
+    function neuesbild(){
+        imageObj.src = "https://thiscatdoesnotexist.com";
+        context.drawImage(imageObj, 0, 0, 576, 577);
+        random_color();
+        
+    }
+
+    function machet(){
+
+        var text = document.getElementById("textinput").value;
+        var lines = text.split("\n");
+        var ll = lines.length;
+        
+        var x = parseInt(document.getElementById("x").value);
+        var y = parseInt(document.getElementById("y").value);
+        var lineHeight = context.measureText("M").width * 1.2;
+        
+        var backgr;
+        var frongr;
+        var xback = x;
+        
+        var i = 0;
+        
+        var my_gradient_front = context.createLinearGradient(0, 0, canvas.width, 0);
+        var my_gradient_back = context.createLinearGradient(0, 0, canvas.width, 0);
+        
+        var e = document.getElementById("schrift");
+        var schrift = e.options[e.selectedIndex].value;
+        
+        context.drawImage(imageObj, 0, 0, 576, 577);
+        
+        frongr = parseInt(document.getElementById("gr").value);
+        backgr = frongr;
+
+        farbe_front1 = document.getElementById("front1").value;
+        farbe_front2 = document.getElementById("front2").value;
+        farbe_front3 = document.getElementById("front3").value;
+        
+        farbe_back1 = document.getElementById("back1").value;
+        farbe_back2 = document.getElementById("back2").value;
+        farbe_back3 = document.getElementById("back3").value;
+        
+        my_gradient_front.addColorStop(0, farbe_front1);
+        my_gradient_front.addColorStop(0.5 , farbe_front2);
+        my_gradient_front.addColorStop(1, farbe_front3);
+        
+        my_gradient_back.addColorStop(0, farbe_back1);
+        my_gradient_back.addColorStop(0.5 , farbe_back2);
+        my_gradient_back.addColorStop(1, farbe_back3);
+                
+        for (i = 0; i < ll; ++i) {
+            context.font =  backgr + "px " + schrift;
+            context.fillStyle = my_gradient_back;
+            context.fillText(lines[i], (x-3), (y-3));
+            context.font = frongr + "px " + schrift;
+            context.fillStyle = my_gradient_front;
+            context.fillText(lines[i], x, y);
+            y += lineHeight;
+        }
+        document.getElementById('idCanvas').setAttribute('crossOrigin', 'anonymous');      
+    }
+    </script>
+</body>
+</html>
