@@ -8,6 +8,7 @@
 </head>
 <body onload="getCat()">
     <div style="float:left;">
+        canvas
         <canvas id = "idCanvas" crossorigin="anonymous" width = "576" height = "577"> </canvas>
     </div>
     <div style="float:left;">
@@ -64,7 +65,7 @@
         <button class="buttonok" name="apply" onclick="javascript:machet();">ändern</button>
         <button class="buttonok" name="apply" onclick="javascript:neuesbild();">neues bild</button><br>
         <button class="buttonok" name="apply" onclick="javascript:to_image();">download</button><br>
-        <image id="theimage" crossorigin="anonymous"></image> 
+        <image id="theimage" crossorigin="anonymous">the image</image> 
     </div>
     <script>
     var canvas = document.getElementById('idCanvas');
@@ -86,9 +87,12 @@
         
         
     function to_image(){
-        var canvas = document.getElementById("idCanvas");
-        document.getElementById("theimage").src = canvas.toDataURL();
+        //var canvas = document.getElementById("idCanvas");
+        //document.getElementById("theimage").src = canvas.toDataURL();
         //Canvas2Image.saveAsPNG(canvas);
+        var canvas = document.getElementById("idCanvas");
+        var img    = canvas.toDataURL("image/png");
+        document.write('<img src="'+img+'"/>');     
     }
         
     function random_color(){
