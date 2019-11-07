@@ -65,12 +65,13 @@
         <button class="buttonok" name="apply" onclick="javascript:machet();">ändern</button>
         <button class="buttonok" name="apply" onclick="javascript:neuesbild();">neues bild</button><br>
         <button class="buttonok" name="apply" onclick="javascript:to_image();">download</button><br>
-        <image id="theimage" crossorigin="anonymous">the image</image> 
     </div>
     <script>
     var canvas = document.getElementById('idCanvas');
     var context = canvas.getContext('2d');
     var imageObj = new Image();
+      
+    imageObj.crossOrigin = "anonymous";
         
     var farbe_front1="";
     var farbe_front2="";
