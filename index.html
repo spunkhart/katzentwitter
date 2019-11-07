@@ -70,8 +70,6 @@
     var canvas = document.getElementById('idCanvas');
     var context = canvas.getContext('2d');
     var imageObj = new Image();
-      
-    imageObj.crossOrigin = "anonymous";
         
     var farbe_front1="";
     var farbe_front2="";
@@ -83,6 +81,7 @@
         
     function getCat(){
         imageObj.src = "https://thiscatdoesnotexist.com";
+        imageObj.crossOrigin = "anonymous";
         context.drawImage(imageObj, 0, 0, 576, 577);
     }
         
