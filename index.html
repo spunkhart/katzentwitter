@@ -80,7 +80,6 @@
         
     function getCat(){
         imageObj.src = "https://thiscatdoesnotexist.com";
-        imageObj.crossOrigin = "anonymous";
         context.drawImage(imageObj, 0, 0, 576, 577);
     }
         
@@ -89,9 +88,9 @@
         //var canvas = document.getElementById("idCanvas");
         //document.getElementById("theimage").src = canvas.toDataURL();
         //Canvas2Image.saveAsPNG(canvas);
-        var canvas = document.getElementById("idCanvas");
-        var img    = canvas.toDataURL("image/png");
-        document.write('<img src="'+img+'"/>');     
+        //var canvas = document.getElementById("idCanvas");
+        //var img    = canvas.toDataURL("image/png");
+        //document.write('<img src="'+img+'"/>');     
     }
         
     function random_color(){
@@ -172,8 +171,7 @@
             context.fillStyle = my_gradient_front;
             context.fillText(lines[i], x, y);
             y += lineHeight;
-        }
-        document.getElementById('idCanvas').setAttribute('crossOrigin', 'anonymous');      
+        }    
     }
     </script>
 </body>
